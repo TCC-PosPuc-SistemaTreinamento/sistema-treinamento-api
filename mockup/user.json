@@ -1,0 +1,20 @@
+[
+    {
+        "email": "caio.silva@gmail.com",
+        "password": "ca#2019",
+        "picture": "drive.google.com/eydhfjs",
+        "role": "user"
+    },
+    {
+        "email": "ana@gmail.com",
+        "password": "ana123",
+        "picture": "drive.google.com/dhjdgsjh",
+        "role": "user"
+    },
+    {
+        "email": "rodrigo.barbosa@gmail.com",
+        "password": "rodrigo@2019",
+        "picture": "drive.google.com/wqwesd",
+        "role": "admin"
+    }
+]

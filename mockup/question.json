@@ -1,0 +1,44 @@
+[
+    {
+        "statement": "Qual linguagem é utilizadp para construção de sites?",
+        "correctAlternative": {
+            "id": 1,
+            "text": "Javascript"
+        },
+        "alternatives": [
+            {
+                "id": 1,
+                "text": "Javascript"
+            },
+            {
+                "id": 2,
+                "text": "Linguagem C"
+            },
+            {
+                "id": 3,
+                "text": "Delphi"
+            }
+        ]
+    },
+    {
+        "statement": "Qual item não é um hardware?",
+        "correctAlternative": {
+            "id": 2,
+            "text": "Browser"
+        },
+        "alternatives": [
+            {
+                "id": 1,
+                "text": "Mouse"
+            },
+            {
+                "id": 2,
+                "text": "Browser"
+            },
+            {
+                "id": 3,
+                "text": "Teclado"
+            }
+        ]
+    }
+]

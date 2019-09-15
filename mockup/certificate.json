@@ -1,0 +1,22 @@
+{
+    "certificates": [
+        {
+            "id": 1,
+            "employee": 2,
+            "course": 1,
+            "issueDate": "2012-07-14T00:00:00Z"
+        },
+        {
+            "id": 2,
+            "employee": 5,
+            "course": 1,
+            "issueDate": "2010-05-14T00:00:00Z"
+        },
+        {
+            "id": 3,
+            "employee": 6,
+            "course": 3,
+            "issueDate": "2018-12-14T00:00:00Z"
+        }
+    ]
+}

@@ -1,29 +1,31 @@
-[
-    {
-        "_id": "1",
-        "name": "Rodrigo Barbosa" ,
-        "dataNasc": "2000-02-10T00:00:00Z",
-        "cpf": "123.432.765-19",
-        "rg": "23.675.256-09",
-        "departament": "TI",
-        "active": true 
-    },
-    {
-        "_id": "2",
-        "name": "Ana Souza" ,
-        "dataNasc": "1997-12-220T00:00:00Z",
-        "cpf": "342.322.725-19",
-        "rg": "33.611.256-12",
-        "departament": "RH",
-        "active": true 
-    },
-    {
-        "_id": "3",
-        "name": "Caio Silva" ,
-        "dataNasc": "1988-12-10T00:00:00Z",
-        "cpf": "321.432.765-19",
-        "rg": "11.675.256-09",
-        "departament": "Juridico",
-        "active": true 
-    }
-]
+{
+    "employees": [
+        {
+            "_id": "1",
+            "name": "Rodrigo Barbosa" ,
+            "dataNasc": "2000-02-10T00:00:00Z",
+            "cpf": "123.432.765-19",
+            "rg": "23.675.256-09",
+            "departament": "TI",
+            "active": true 
+        },
+        {
+            "_id": "2",
+            "name": "Ana Souza" ,
+            "dataNasc": "1997-12-220T00:00:00Z",
+            "cpf": "342.322.725-19",
+            "rg": "33.611.256-12",
+            "departament": "RH",
+            "active": true 
+        },
+        {
+            "_id": "3",
+            "name": "Caio Silva" ,
+            "dataNasc": "1988-12-10T00:00:00Z",
+            "cpf": "321.432.765-19",
+            "rg": "11.675.256-09",
+            "departament": "Juridico",
+            "active": true 
+        }
+    ]
+}

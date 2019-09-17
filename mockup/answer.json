@@ -1,26 +1,28 @@
-[
-    {
-        "employee": "1",
-        "question": "34",
-        "created": "2000-02-10T00:00:00Z",
-        "activity": "23"
-    },
-    {
-        "employee": "1",
-        "question": "35",
-        "created": "2000-02-10T00:00:00Z",
-        "activity": "23"
-    },
-    {
-        "employee": "1",
-        "question": "36",
-        "created": "2000-02-10T00:00:00Z",
-        "activity": "23"
-    },
-    {
-        "employee": "4",
-        "question": "12",
-        "created": "2000-02-10T00:00:00Z",
-        "activity": "5"
-    }
-]
+{
+   "answers": [
+        {
+            "employee": "1",
+            "question": "34",
+            "created": "2000-02-10T00:00:00Z",
+            "activity": "23"
+        },
+        {
+            "employee": "1",
+            "question": "35",
+            "created": "2000-02-10T00:00:00Z",
+            "activity": "23"
+        },
+        {
+            "employee": "1",
+            "question": "36",
+            "created": "2000-02-10T00:00:00Z",
+            "activity": "23"
+        },
+        {
+            "employee": "4",
+            "question": "12",
+            "created": "2000-02-10T00:00:00Z",
+            "activity": "5"
+        }
+    ]
+}

@@ -1,27 +1,29 @@
-[
-    {
-        "employee": 1,
-        "activity": 2,
-        "grade": 8
-    },
-    {
-        "employee": 1,
-        "activity": 3,
-        "grade": 9.2
-    },
-    {
-        "employee": 2,
-        "activity": 5,
-        "grade": 6
-    },
-    {
-        "employee": 4,
-        "activity": 4,
-        "grade": 5.1
-    },
-    {
-        "employee": 4,
-        "activity": 9,
-        "grade": 2.6
-    }
-]
+{
+    "grades": [
+        {
+            "employee": 1,
+            "activity": 2,
+            "grade": 8
+        },
+        {
+            "employee": 1,
+            "activity": 3,
+            "grade": 9.2
+        },
+        {
+            "employee": 2,
+            "activity": 5,
+            "grade": 6
+        },
+        {
+            "employee": 4,
+            "activity": 4,
+            "grade": 5.1
+        },
+        {
+            "employee": 4,
+            "activity": 9,
+            "grade": 2.6
+        }
+    ]
+}

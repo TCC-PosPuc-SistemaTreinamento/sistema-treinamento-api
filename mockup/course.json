@@ -1,78 +1,80 @@
-[
-    {
-        "id": 1,
-        "title": "Tecnicas de venda",
-        "categoty": "Gestão pessoal",
-        "instructor": "Fabio Camara",
-        "unity": [
-            {
-                "title": "Introdução a tecnicas de venda",
-                "position": 1,
-                "video": {
-                    "url": "http://youtube.com/intro_tv",
-                    "legend": "Introdução tecnicas video"
+{
+    "courses": [
+        {
+            "id": 1,
+            "title": "Tecnicas de venda",
+            "categoty": "Gestão pessoal",
+            "instructor": "Fabio Camara",
+            "unity": [
+                {
+                    "title": "Introdução a tecnicas de venda",
+                    "position": 1,
+                    "video": {
+                        "url": "http://youtube.com/intro_tv",
+                        "legend": "Introdução tecnicas video"
+                    },
+                    "material": {
+                        "legend": "Intro material",
+                        "type": "Docx",
+                        "attachment": "drive.google.com/tecnicas_material"
+                    },
+                    "activity": {
+                        "legend": "Atividade introdutória",
+                        "approvedGrade": 7,
+                        "questionBase": 6    
+                    }
                 },
-                "material": {
-                    "legend": "Intro material",
-                    "type": "Docx",
-                    "attachment": "drive.google.com/tecnicas_material"
+                {
+                    "title": "5 tecnicas para vender mais",
+                    "position": 2,
+                    "video": {
+                        "url": "http://youtube.com/5tv",
+                        "legend": "5 tecnicas de venda"
+                    },
+                    "material": {
+                        "legend": "Documentação das tecnicas",
+                        "type": "PDF",
+                        "attachment": "drive.google.com/5tv"
+                    },
+                    "activity": {
+                        "legend": "Desafio das 5 tecbicas",
+                        "approvedGrade": 7,
+                        "questionBase": 3    
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Desenvolvimento basico de sites",
+            "categoty": "Tecnologia",
+            "instructor": "Felipe Deschamps",
+            "unity": [
+                {
+                    "title": "HTML basico",
+                    "position": 1,
+                    "video": {
+                        "url": "http://youtube.com/intro_html",
+                        "legend": "HTML basico"
+                    }
                 },
-                "activity": {
-                    "legend": "Atividade introdutória",
-                    "approvedGrade": 7,
-                    "questionBase": 6    
-                }
-            },
-            {
-                "title": "5 tecnicas para vender mais",
-                "position": 2,
-                "video": {
-                    "url": "http://youtube.com/5tv",
-                    "legend": "5 tecnicas de venda"
+                {
+                    "title": "CSS basico",
+                    "position": 2,
+                    "video": {
+                        "url": "http://youtube.com/intro_css",
+                        "legend": "CSS basico"
+                    }
                 },
-                "material": {
-                    "legend": "Documentação das tecnicas",
-                    "type": "PDF",
-                    "attachment": "drive.google.com/5tv"
-                },
-                "activity": {
-                    "legend": "Desafio das 5 tecbicas",
-                    "approvedGrade": 7,
-                    "questionBase": 3    
+                {
+                    "title": "JS basico",
+                    "position": 3,
+                    "video": {
+                        "url": "http://youtube.com/intro_js",
+                        "legend": "JS basico"
+                    }
                 }
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "title": "Desenvolvimento basico de sites",
-        "categoty": "Tecnologia",
-        "instructor": "Felipe Deschamps",
-        "unity": [
-            {
-                "title": "HTML basico",
-                "position": 1,
-                "video": {
-                    "url": "http://youtube.com/intro_html",
-                    "legend": "HTML basico"
-                }
-            },
-            {
-                "title": "CSS basico",
-                "position": 2,
-                "video": {
-                    "url": "http://youtube.com/intro_css",
-                    "legend": "CSS basico"
-                }
-            },
-            {
-                "title": "JS basico",
-                "position": 3,
-                "video": {
-                    "url": "http://youtube.com/intro_js",
-                    "legend": "JS basico"
-                }
-            }
-        ]
-    }
-]
+            ]
+        }
+    ]
+}

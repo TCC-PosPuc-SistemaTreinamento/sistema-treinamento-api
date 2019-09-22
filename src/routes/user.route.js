@@ -1,8 +1,12 @@
-const express = require('express');
-const userRouter = express.Router();
+let user = require('../controllers/user.controller');
 
-userRouter.get('/', (req, res) => {
-    res.status(200).send({ message: 'Rota User' })
-})
+module.exports = (app) => {
+    app.route('/api/users')
+        .get(user.getAll)
+        .post(user.create);
 
-module.exports = userRouter;
+    app.route('/api/users/:id')
+        .get(user.getById)
+        .put(user.update)
+        .delete(user.remove);
+}

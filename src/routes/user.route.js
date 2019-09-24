@@ -9,4 +9,7 @@ module.exports = (app) => {
         .get(user.getById)
         .put(user.update)
         .delete(user.remove);
+
+    app.route('/api/users/authenticate')
+        .post(user.authenticate);
 }

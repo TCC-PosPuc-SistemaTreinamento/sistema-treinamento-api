@@ -10,11 +10,8 @@ exports.getAll = async () => {
 }
 
 exports.create = async (user) => {
-    console.log('eeeee')
     let newUser = new User(user);
-    let tt = await newUser.save();
-    console.log(tt)
-    return tt
+    return await newUser.save();
 }
 
 exports.update = async (user) => {
@@ -25,4 +22,12 @@ exports.update = async (user) => {
 exports.remove = async (id) => {
     await User.remove({ _id: id });
     return { success: true };
+}
+
+exports.authenticate = async (data) => {
+    const res = await User.findOne({
+        email: data.email,
+        password: data.password
+    });
+    return res;
 }

@@ -4,23 +4,56 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    email: {
+    username: {
         type: String,
-        required: true
+        required: true,
+        index: { unique: true },
+        lowercase: true
     },
     password: {
         type: String,
         required: true
     },
-    picture: {
+    cpf: {
+        type: String,
+        required: true,
+        index: { unique: true },
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    isActive: { 
+        type: Boolean,
+        default: true 
+    },
+    fisrtAccess: {
+        type: Boolean,
+        default: true
+    },
+    departament: {
+        type: Schema.Types.ObjectId,
+        ref: 'Departament',
+        required: true
+    },
+    role: {
+        type: Schema.Types.ObjectId,
+        ref: 'Role',
+        required: true
+    },
+    phone: {
         type: String,
         required: false
     },
-    role: {
+    privilege: {
         type: String,
         required: true,
-        enum: ["user", "admin"],
+        enum: ["user", "instructor", "admin"],
         default: "user"
+    },
+    picture: {
+        type: String,
+        required: false
     }
 });
 

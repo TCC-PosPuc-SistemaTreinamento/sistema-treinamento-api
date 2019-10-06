@@ -7,7 +7,7 @@ exports.getAll = async (req, res) => {
     try{
         const users = await Repository.getAll();
         res.status(200).json(users)
-    } catch (error) {
+    } catch (err) {
         res.status(400).json({ message: 'error' })
     }
 }
@@ -17,22 +17,20 @@ exports.getById = async (req, res) => {
         const id = req.params.id;
         const user = await Repository.getById(id);
         res.status(200).json( user )
-    } catch (error) {
+    } catch (err) {
+        console.log( err )
         res.status(400).json({ message: 'error' })
     }
 }
 
 exports.create = async (req, res) => {
     try{
-        let user = {
-            name: req.body.name,
-            email: req.body.email,
-            password: md5(req.body.email + config.tokenJWT),
-            role: req.body.role
-        }
+        let user = req.body;
+        user.password = md5(user.password + config.tokenJWT);
+
         const newUser = await Repository.create(user);
         res.status(200).json( newUser )
-    } catch (error) {
+    } catch (err) {
         res.status(400).json({ message: 'error' })
     }
 }
@@ -66,7 +64,7 @@ exports.remove = async (req, res) => {
 exports.authenticate = async (req, res) => {
     try{
         const user = await Repository.authenticate({
-            email: req.body.email,
+            username: req.body.username,
             password: md5(req.body.password + config.tokenJWT)
         });
 
@@ -76,19 +74,56 @@ exports.authenticate = async (req, res) => {
         }
 
         const token = await authService.generateToken({
-            email: user.email,
+            id: user._id,
+            username: user.username,
             name: user.name,
-            role: user.role
-        })
+            privilege: user.privilege
+        });
 
         res.status(200).json({
             token: token,
             data: {
-                email: user.email,
+                id: user._id,
+                username: user.username,
                 name: user.name,
-                role: user.role
+                privilege: user.privilege
             }
-        })
+        });
+
+    } catch(error) {
+        res.status(200).json({ message: 'error' })
+    }
+}
+
+exports.refreshToken = async (req, res) => {
+    try{
+
+        const token = req.body.token || req.query.token || req.headers['x-access-token'];
+        const data = await authService.decodeToken(token);
+
+        const user = await Repository.getById(data.id);
+
+        if(!user){
+            res.status(401).json({ message: 'Usuário não encontrado' });
+            return;
+        }
+
+        const tokenRefresh = await authService.generateToken({
+            id: user._id,
+            username: user.username,
+            name: user.name,
+            privilege: user.privilege
+        });
+
+        res.status(200).json({
+            token: tokenRefresh,
+            data: {
+                id: user._id,
+                username: user.username,
+                name: user.name,
+                privilege: user.privilege
+            }
+        });
 
     } catch(error) {
         res.status(200).json({ message: 'error' })

@@ -1,5 +1,4 @@
-const Model = require('../models/user');
-const User = Model.User;
+const User = require('../models/user').User;
 
 exports.getById = async (id) => {
     return await User.findById(id);
@@ -24,10 +23,10 @@ exports.remove = async (id) => {
     return { success: true };
 }
 
-exports.authenticate = async (data) => {
+exports.authenticate = async (user) => {
     const res = await User.findOne({
-        email: data.email,
-        password: data.password
+        username: user.username,
+        password: user.password
     });
     return res;
 }

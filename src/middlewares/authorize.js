@@ -7,7 +7,12 @@ module.exports = async(req, res, next) => {
         //condições para validar role de usuario e rotas que não precisam de autorização ou token
 
         authService.authorize(req, res, next);
-    } catch (error) {
-        res.status(401).send({ 'error' : 'Acesso negado jj' });
+
+        //rota restrita
+        //authService.isAdmin(req, res, next);
+
+    } catch (err) {
+        console.log(err)
+        res.status(401).send({ 'error' : 'Acesso negado' });
     }
 }

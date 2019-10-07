@@ -81,12 +81,13 @@ exports.authenticate = async (req, res) => {
         });
 
         res.status(200).json({
-            token: token,
-            data: {
+            success: true,
+            user: {
                 id: user._id,
                 username: user.username,
                 name: user.name,
-                privilege: user.privilege
+                privilege: user.privilege,
+                token: token
             }
         });
 
@@ -116,12 +117,13 @@ exports.refreshToken = async (req, res) => {
         });
 
         res.status(200).json({
-            token: tokenRefresh,
-            data: {
+            success: true,
+            user: {
                 id: user._id,
                 username: user.username,
                 name: user.name,
-                privilege: user.privilege
+                privilege: user.privilege,
+                token: tokenRefresh
             }
         });
 

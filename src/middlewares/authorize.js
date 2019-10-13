@@ -1,16 +1,16 @@
 const authService = require('../services/auth.service');
 const config = require('../../config/config');
+const utils = require('../services/utils.service');
 
 module.exports = async(req, res, next) => {
     try{
+        const module = utils.getModuleByUrl(req._parsedUrl.pathname),
+              method = req.method;
 
-        //condições para validar role de usuario e rotas que não precisam de autorização ou token
-
+        if(authService.dontNeedToAuthorize(module, method))
+            return next();
+    
         authService.authorize(req, res, next);
-
-        //rota restrita
-        //authService.isAdmin(req, res, next);
-
     } catch (err) {
         console.log(err)
         res.status(401).send({ 'error' : 'Acesso negado' });

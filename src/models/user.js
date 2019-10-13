@@ -25,15 +25,15 @@ const schema = new Schema({
     },
     isActive: { 
         type: Boolean,
-        default: true 
+        default: true
     },
     fisrtAccess: {
         type: Boolean,
         default: true
     },
-    departament: {
+    department: {
         type: Schema.Types.ObjectId,
-        ref: 'Departament',
+        ref: 'Department',
         required: true
     },
     role: {
@@ -50,6 +50,14 @@ const schema = new Schema({
         required: true,
         enum: ["user", "instructor", "admin"],
         default: "user"
+    },
+    born: {
+        type: Date,
+        required: true
+    },
+    sex: {
+        type: Number, //0 - Não informado, 1 - Masculino, 2 - Feminino
+        required: false
     },
     picture: {
         type: String,

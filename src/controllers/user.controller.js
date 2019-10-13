@@ -31,7 +31,7 @@ exports.create = async (req, res) => {
         const newUser = await Repository.create(user);
         res.status(200).json( newUser )
     } catch (err) {
-        res.status(400).json({ message: 'error' })
+        res.status(400).json({ message: 'error', err })
     }
 }
 
@@ -40,13 +40,14 @@ exports.update = async (req, res) => {
         const id = req.params.id;
         const user = await Repository.getById(id);
         const newUser = req.body;
-        newUser.password = md5(newUser.password + config.tokenJWT);
+        // newUser.password = md5(newUser.password + config.tokenJWT);
+        delete newUser.password;
 
         Object.assign(user, newUser);
         
         await Repository.update(user);
         res.status(200).json( user )
-    } catch (error) {
+    } catch (err) {
         res.status(400).json({ message: 'error' })
     }
 }
@@ -67,6 +68,7 @@ exports.authenticate = async (req, res) => {
             username: req.body.username,
             password: md5(req.body.password + config.tokenJWT)
         });
+        console.log(user)
 
         if(!user){
             res.status(400).json({ message: 'Usuário ou senha inválidos' });

@@ -5,7 +5,10 @@ exports.getById = async (id) => {
 }
 
 exports.getAll = async () => {
-    return await User.find({});
+    return await User.find({})
+        .populate('role')
+        .populate('department');
+        
 }
 
 exports.create = async (user) => {

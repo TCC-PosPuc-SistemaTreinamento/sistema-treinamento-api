@@ -1,15 +1,10 @@
 let user = require('../controllers/user.controller');
+const authService = require('../services/auth.service');
 
 module.exports = (app) => {
     app.route('/api/users')
         .get(user.getAll)
-        .post(user.create);
-
-    app.route('/api/users/authenticate')
-        .post(user.authenticate);
-
-    app.route('/api/users/refresh-token')
-        .post(user.refreshToken);
+        .post(authService.isAdmin, user.create);
 
     app.route('/api/users/:id')
         .get(user.getById)

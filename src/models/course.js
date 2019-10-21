@@ -9,15 +9,16 @@ const schema = new Schema({
         required: true
     },
     category: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
         required: true
     },
     instructor: {
         type: String,
         required: true
     },
-    unity: [{
-        title: {
+    units: [{
+        name: {
             type: String,
             required: true
         },
@@ -28,42 +29,43 @@ const schema = new Schema({
         video: {
             url: {
                 type: String,
-                required: true
+                required: false
             },
             legend: {
                 type: String,
-                required: true
+                required: false
             }
         },
         material: {
             legend: {
                 type: String,
-                required: true
+                required: false
             },
             type: {
                 type: String,
-                required: true
+                required: false
             },
             attachment: {
                 type: String,
-                required: true  
+                required: false  
             }
         },
         activity: {
             legend: {
                 type: String,
-                required: true
+                required: false
             },
             approvedGrade: {
                 type: Number,
-                required: true
+                required: false
             },
             questionBase: {
-                type: Schema.Types.ObjectId,
-                required: true
+                // type: Schema.Types.ObjectId,
+                type: String,
+                required: false
             }
         }
     }]
 });
 
-module.exports = mongoose.model('Employee', schema);
+module.exports.Course = mongoose.model('Course', schema, 'courses');

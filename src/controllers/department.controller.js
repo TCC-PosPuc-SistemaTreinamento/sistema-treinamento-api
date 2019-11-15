@@ -11,9 +11,12 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try{
-        res.status(200).send({ message: 'department byId' })
-    } catch (error) {
-        res.status(400).send({ message: 'error' })
+        const id = req.params.id;
+        const department = await Repository.getById(id);
+        res.status(200).json( department )
+    } catch (err) {
+        console.log( err )
+        res.status(400).json({ message: 'error' })
     }
 }
 
@@ -32,16 +35,26 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try{
-        res.status(200).send({ message: 'department update' })
-    } catch (error) {
-        res.status(400).send({ message: 'error' })
+        const id = req.params.id;
+        const department = await Repository.getById(id);
+        const newDepartment = req.body;
+
+        Object.assign(department, newDepartment);
+        
+        await Repository.update(department);
+        res.status(200).json( department )
+    } catch (err) {
+        res.status(400).json({ message: 'error' })
     }
 }
 
 exports.remove = async (req, res) => {
     try{
-        res.status(200).send({ message: 'department remove' })
+        const id = req.params.id;
+        await Repository.remove(id);
+        res.status(200).json({ success: true });
     } catch (error) {
-        res.status(400).send({ message: 'error' })
+        console.log(error)
+        res.status(400).json({ message: 'error' })
     }
 }

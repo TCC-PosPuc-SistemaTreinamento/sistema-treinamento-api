@@ -1,7 +1,9 @@
-let department = require('../controllers/department.controller');
+const department = require('../controllers/department.controller'),
+    authService = require('../services/auth.service');
 
 module.exports = (app) => {
     app.route('/api/departments')
+        // .get(authService.isAdmin, department.getAll)
         .get(department.getAll)
         .post(department.create);
 

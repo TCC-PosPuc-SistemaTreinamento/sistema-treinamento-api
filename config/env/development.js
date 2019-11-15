@@ -6,7 +6,7 @@ module.exports = {
     tokenJWT: 'secret-jwt-token-auth',
 
     mongodb: {
-        url: 'mongodb://xxx:yyy@ds129098.mlab.com:29098/sistema-treinamento',
+        url: 'mongodb://admin:admin@localhost:27017/sistema-treinamento',
         option: {
             user: 'xxx',
             pass: 'xxx',

@@ -7,7 +7,7 @@ module.exports = async(req, res, next) => {
         const module = utils.getModuleByUrl(req._parsedUrl.pathname),
               method = req.method;
 
-        if(authService.dontNeedToAuthorize(module, method))
+        if(authService.dontNeedToAuthorize(module, method) || req._parsedUrl.pathname.includes('/courses/files/'))
             return next();
     
         authService.authorize(req, res, next);

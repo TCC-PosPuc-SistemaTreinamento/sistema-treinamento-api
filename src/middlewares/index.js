@@ -1,8 +1,11 @@
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const authorize = require('./authorize');
+const morgan = require('morgan');
 
 module.exports = (app) => {
+
+    app.use(morgan('dev'));
 
     app.use(cors({
 		origin: '*',

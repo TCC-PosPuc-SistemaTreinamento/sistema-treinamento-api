@@ -1,10 +1,18 @@
 const Course = require('../models/course').Course;
 
 exports.getAll = async () => {
-    return await Course.find({});
+    return await Course.find({},{
+        name: 1, instructor: 1, description: 1, category: 1
+    });
 }
 
 exports.getById = async (id) => {
+    return await Course.findById(id, {
+        name: 1, instructor: 1, description: 1, category: 1
+    })
+}
+
+exports.getByIdFull = async (id) => {
     return await Course.findById(id)
 }
 

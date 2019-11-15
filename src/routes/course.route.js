@@ -37,6 +37,9 @@ module.exports = (app) => {
         .put(course.update)
         .delete(course.remove);
     
+    app.route('/api/courses/:id/full')
+        .get(course.getByIdFull);
+        
     app.route('/api/courses/:id/upload')
         .get(course.getFiles)
         .post(upload.single('file'), course.uploadFile);

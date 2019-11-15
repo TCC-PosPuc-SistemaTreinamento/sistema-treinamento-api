@@ -17,3 +17,9 @@ exports.update = async (course) => {
     let newCourse = new Course(course)
     return await newCourse.save();
 }
+
+exports.getCoursesByCategoryId = async (id) => {
+    return await Course.find({
+        category: id
+    }, { _id: 1, name: 1});
+}

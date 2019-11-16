@@ -112,3 +112,35 @@ exports.getFile = async (req, res) => {
         return readstream.pipe(res);
     });
 }
+
+exports.createEvaluate = async (req, res) => {
+    try {
+        const { evaluate } = req.body;
+        const { id } = req.params;
+
+        const courseExist = await Repository.getById(id);
+
+        if( !courseExist ) {
+           return res.status(400).json({ message: 'Este curso não existe'});
+        }
+
+        if (courseExist.evaluates && courseExist.evaluates.length > 0) {
+            let userEvaluated = courseExist.evaluates.find(e => e.userId === evaluate.userId);
+            
+            if ( userEvaluated ) {
+                return res.status(204).json({ });
+            }   
+        }
+
+        courseExist.evaluates.push(evaluate);
+        await Repository.update(courseExist)
+        
+        return res.status(200).json({ message: 'Avaliação cadastrada!'});
+
+    } catch(error) {
+
+        console.log(error);
+        return res.status(400).json({ message: 'error'});
+    }
+    
+}

@@ -15,7 +15,9 @@ exports.getCertificates = async (userId) => {
     return await Enrollment.find({ 
         user: userId,
         completed: true
-    }).populate('course');
+    })
+    .populate('course')
+    .populate('user');
 }
 
 exports.completeCourse = async (enrolled) => {

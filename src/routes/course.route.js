@@ -41,4 +41,6 @@ module.exports = (app) => {
         .get(course.getFiles)
         .post(upload.single('file'), course.uploadFile);
     
+    app.route('/api/courses/:id/evaluate')
+        .post(course.createEvaluate)
 }

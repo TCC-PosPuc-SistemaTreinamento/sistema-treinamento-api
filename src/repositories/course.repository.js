@@ -18,8 +18,14 @@ exports.update = async (course) => {
     return await newCourse.save();
 }
 
-exports.getCoursesByCategoryId = async (id) => {
+exports.getCoursesByCategoryId = async (categoryId) => {
     return await Course.find({
-        category: id
-    }, { _id: 1, name: 1});
+        category: categoryId
+    },
+    { 
+        _id: 1, 
+        name: 1, 
+        instructor: 1,
+        visible: 1
+    });
 }

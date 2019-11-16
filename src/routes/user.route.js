@@ -6,6 +6,9 @@ module.exports = (app) => {
         .get(user.getAll)
         .post(authService.isAdmin, user.create);
 
+    app.route('/api/users/change-password')
+        .post(user.changePassword);
+
     app.route('/api/users/:id')
         .get(user.getById)
         .put(user.update)

@@ -49,4 +49,7 @@ module.exports = (app) => {
 
     // app.route('/api/courses/:id/capa')
     //     .get(course.getCapa);
+    
+    app.route('/api/courses/:id/evaluate')
+        .post(course.createEvaluate)
 }

@@ -26,10 +26,16 @@ exports.update = async (course) => {
     return await newCourse.save();
 }
 
-exports.getCoursesByCategoryId = async (id) => {
+exports.getCoursesByCategoryId = async (categoryId) => {
     return await Course.find({
-        category: id
-    }, { _id: 1, name: 1});
+        category: categoryId
+    },
+    { 
+        _id: 1, 
+        name: 1, 
+        instructor: 1,
+        visible: 1
+    });
 }
 
 exports.getEvaluatesByUser = async (id) => {
@@ -37,8 +43,4 @@ exports.getEvaluatesByUser = async (id) => {
         { '$unwind': "$evaluates" },
         { '$match': { "evaluates.userId": id } }
     ])
-}
-
-exports.getQtdVideos = async (id) => {
-    return await Course.find
 }

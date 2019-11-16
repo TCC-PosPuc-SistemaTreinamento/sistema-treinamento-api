@@ -19,6 +19,9 @@ exports.getById = async (req, res) => {
     try{
         const id = req.params.id;
         const user = await Repository.getById(id);
+        delete user.password;
+
+        console.log('lalal', user);
         res.status(200).json( user )
     } catch (err) {
         console.log( err )
@@ -43,8 +46,13 @@ exports.update = async (req, res) => {
         const id = req.params.id;
         const user = await Repository.getById(id);
         const newUser = req.body;
-        // newUser.password = md5(newUser.password + config.tokenJWT);
-        delete newUser.password;
+
+        if(newUser.password && newUser.password !== '') {
+            newUser.password = md5(newUser.password + config.tokenJWT);
+        } else {
+            delete user.password;
+            delete newUser.password;
+        }
 
         Object.assign(user, newUser);
         
@@ -107,6 +115,10 @@ exports.authenticate = async (req, res) => {
             return;
         }
 
+        if(!user.isActive) {
+            return res.status(403).json({ message: 'Este usuário foi bloquado'})
+        }
+
         const token = await authService.generateToken({
             id: user._id,
             username: user.username,
@@ -127,6 +139,33 @@ exports.authenticate = async (req, res) => {
 
     } catch(error) {
         res.status(200).json({ message: 'error' })
+    }
+}
+
+exports.changePassword = async (req, res) => {
+    try {
+        let { oldPassword, newPassword, userId } = req.body;
+
+        const { password } = await Repository.updatePassword(userId);
+
+        oldPassword = md5(oldPassword + config.tokenJWT);
+
+        if( password !== oldPassword ) {
+            return res.status(400).json({ 
+                message: 'A senha inserida não é a sua senha atual!'
+            });
+        }
+
+        const user = await Repository.getById(userId);
+
+        user.password = md5(newPassword + config.tokenJWT);
+
+        await Repository.update(user);
+
+        return res.status(200).json({ id: user._id })
+
+    } catch(error) {
+        return res.status(400).json({ message: 'error' })
     }
 }
 

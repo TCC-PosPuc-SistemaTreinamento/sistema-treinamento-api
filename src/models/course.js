@@ -41,6 +41,11 @@ const schema = new Schema({
             ref: 'Quiz',
             required: false
         },
+    }],
+    evaluates: [{
+        userId: { type: String, required: false },
+        comment: {type: String, required: false},
+        rating: { type: Number, required: false },
     }]
 });
 

@@ -48,7 +48,7 @@ const schema = new Schema({
     privilege: {
         type: String,
         required: true,
-        enum: ["user", "instructor", "admin"],
+        enum: ["user", "admin"],
         default: "user"
     },
     born: {

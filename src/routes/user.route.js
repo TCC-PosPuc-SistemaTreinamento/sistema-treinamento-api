@@ -11,4 +11,10 @@ module.exports = (app) => {
         .put(user.update)
         .delete(user.remove);
 
+    app.route('/api/users/:id/progress')
+        .get(user.userProgress);
+
+    app.route('/api/users/:id/evaluates')
+        .get(user.evaluates);
+
 }

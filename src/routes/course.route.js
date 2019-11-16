@@ -39,9 +39,14 @@ module.exports = (app) => {
     
     app.route('/api/courses/:id/full')
         .get(course.getByIdFull);
+
+    app.route('/api/courses/:id/conclusion')
+        .post(course.verifyConclusion);
         
     app.route('/api/courses/:id/upload')
         .get(course.getFiles)
         .post(upload.single('file'), course.uploadFile);
-    
+
+    // app.route('/api/courses/:id/capa')
+    //     .get(course.getCapa);
 }

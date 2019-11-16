@@ -31,3 +31,14 @@ exports.getCoursesByCategoryId = async (id) => {
         category: id
     }, { _id: 1, name: 1});
 }
+
+exports.getEvaluatesByUser = async (id) => {
+    return await Course.aggregate([
+        { '$unwind': "$evaluates" },
+        { '$match': { "evaluates.userId": id } }
+    ])
+}
+
+exports.getQtdVideos = async (id) => {
+    return await Course.find
+}

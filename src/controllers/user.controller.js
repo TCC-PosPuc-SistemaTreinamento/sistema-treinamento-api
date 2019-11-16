@@ -1,6 +1,9 @@
 const Repository = require('../repositories/user.repository');
+const courseRepository = require('../repositories/course.repository');
+const enrollRepository = require('../repositories/enrollment.repository');
 const md5 = require('md5');
 const authService = require('../services/auth.service');
+const _ = require('lodash');
 const config = require('../../config/config');
 
 exports.getAll = async (req, res) => {
@@ -58,6 +61,35 @@ exports.remove = async (req, res) => {
         const result = await Repository.remove(id);
         res.status(200).json( result )
     } catch (error) {
+        res.status(400).json({ message: 'error' })
+    }
+}
+
+exports.userProgress = async (req, res) => {
+    try{
+        const id = req.params.id;
+        let userAllWatched = await enrollRepository.getUserAllWached(id);
+        let userAllGrades = await enrollRepository.getUserAllGrades(id);
+        for(let grade of userAllGrades){
+            for(let watched of userAllWatched){
+                if(String(grade.course._id) == String(watched.course._id))
+                    grade.watched = watched.watched;
+            }
+        }
+        res.status(200).json( userAllGrades );
+    } catch(err) {
+        console.log(err)
+        res.status(400).json({ message: 'error' })
+    }
+}
+
+exports.evaluates = async (req, res) => {
+    try{
+        const id = req.params.id;
+        let userEvaluates = await courseRepository.getEvaluatesByUser(id);
+        res.status(200).json( userEvaluates );
+    } catch(err) {
+        console.log(err)
         res.status(400).json({ message: 'error' })
     }
 }

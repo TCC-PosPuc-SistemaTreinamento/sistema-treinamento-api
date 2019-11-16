@@ -15,9 +15,7 @@ exports.getEnrolledByCourse = async (req, res) => {
 exports.getCourseByUser = async (req, res) => {
     try{
         const id = req.params.id;
-        console.log(id)
         const courses = await Repository.getCourseByUser(id);
-        console.log(courses)
         res.status(200).json(courses);
     } catch (err) {
         console.log(err)

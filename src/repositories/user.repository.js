@@ -1,14 +1,15 @@
 const User = require('../models/user').User;
 
 exports.getById = async (id) => {
-    return await User.findById(id);
+    return await User.findById(id)
+        .populate('role')
+        .populate('department');
 }
 
 exports.getAll = async () => {
     return await User.find({})
         .populate('role')
         .populate('department');
-        
 }
 
 exports.create = async (user) => {

@@ -31,6 +31,16 @@ exports.getById = async (req, res) => {
     }
 }
 
+exports.getByIdFull = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const course = await Repository.getByIdFull(id);
+        res.status(200).json(course);
+    } catch (error) {
+        res.status(400).json({ message: 'error' })
+    }
+}
+
 exports.create = async (req, res) => {
     try{
         const course = req.body;

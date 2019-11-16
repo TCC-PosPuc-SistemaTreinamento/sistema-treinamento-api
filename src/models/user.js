@@ -59,10 +59,10 @@ const schema = new Schema({
         type: Number, //0 - Não informado, 1 - Masculino, 2 - Feminino
         required: false
     },
-    picture: {
-        type: String,
-        required: false
-    }
+    // picture: {
+    //     type: String,
+    //     required: false
+    // }
 });
 
 module.exports.User = mongoose.model('User', schema, 'users');

@@ -9,6 +9,10 @@ exports.getById = async (id) => {
     return await Quiz.findById(id)
 }
 
+exports.getQtd = async() => {
+    return await Quiz.count({});
+}
+
 exports.create = async (quiz) => {
     let newQuiz = new Quiz(quiz)
     return await newQuiz.save();

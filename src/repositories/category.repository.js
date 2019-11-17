@@ -17,3 +17,7 @@ exports.update = async (category) => {
     let newCategory = new Category(category)
     return await newCategory.save();
 }
+
+exports.getQtd = async() => {
+    return await Category.count({});
+}

@@ -17,6 +17,10 @@ exports.create = async (user) => {
     return await newUser.save();
 }
 
+exports.getQtd = async() => {
+    return await User.count({});
+}
+
 exports.update = async (user) => {
     let newUser = new User(user);
     return await newUser.save();

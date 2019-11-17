@@ -16,6 +16,10 @@ exports.getByIdFull = async (id) => {
     return await Course.findById(id)
 }
 
+exports.getQtd = async() => {
+    return await Course.count({});
+}
+
 exports.create = async (course) => {
     let newCourse = new Course(course)
     return await newCourse.save();

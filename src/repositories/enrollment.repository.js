@@ -10,7 +10,7 @@ exports.getEnrolledByCourse = async (courseId) => {
 exports.getCourseByUser = async (userId) => {
     return await Enrollment.find({ user: userId })
         .populate('course', {
-            name: 1, instructor: 1
+            name: 1, instructor: 1, visible: 1
         });
 }
 

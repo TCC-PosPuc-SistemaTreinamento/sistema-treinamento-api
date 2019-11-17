@@ -17,7 +17,10 @@ const schema = new Schema({
         ref: 'Category',
         required: true
     },
-    keyWords: [],
+    keyWords: {
+        type: String,
+        required: true
+    },
     instructor: {
         type: String,
         required: true

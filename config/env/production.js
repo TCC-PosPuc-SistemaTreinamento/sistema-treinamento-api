@@ -4,9 +4,18 @@ module.exports = {
     production: true,
     sandGridKey: 'xxx',
     tokenJWT: 'secret-jwt-token-auth',
+    
+    // mongodb: {
+    //     url: 'mongodb://' + process.env.MONGO_LOGIN + ':' + process.env.PWD + '@' + process.env.DDDD,
+    //     option: {
+    //         useMongoClient: true
+    //     }
+    // }
     mongodb: {
-        url: 'mongodb://' + process.env.MONGO_LOGIN + ':' + process.env.PWD + '@' + process.env.DDDD,
+        url: process.env.MONGO_URL,
         option: {
+            user: 'xxx',
+            pass: 'xxx',
             useMongoClient: true
         }
     }

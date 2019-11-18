@@ -44,7 +44,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     try{
         const id = req.params.id;
-        const user = await Repository.getById(id);
+        let user = await Repository.getById(id);
         const newUser = req.body;
 
         if(newUser.password && newUser.password !== '') {
@@ -59,6 +59,7 @@ exports.update = async (req, res) => {
         await Repository.update(user);
         res.status(200).json( user )
     } catch (err) {
+        console.log(err)
         res.status(400).json({ message: 'error' })
     }
 }

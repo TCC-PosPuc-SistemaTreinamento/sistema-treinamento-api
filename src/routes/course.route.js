@@ -32,13 +32,13 @@ module.exports = (app) => {
     app.route('/api/courses/files/:filename')
         .get(course.getFile);
 
+    app.route('/api/courses/:id/full')
+        .get(course.getByIdFull);
+
     app.route('/api/courses/:id')
         .get(course.getById)
         .put(course.update)
         .delete(course.remove);
-    
-    app.route('/api/courses/:id/full')
-        .get(course.getByIdFull);
 
     app.route('/api/courses/:id/conclusion')
         .post(course.verifyConclusion);

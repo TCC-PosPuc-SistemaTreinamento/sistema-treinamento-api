@@ -59,16 +59,14 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     try{
         const id = req.params.id;
-        console.log(id)
-        const course = await Repository.getById(id);
-        console.log(course)
+        const course = await Repository.getByIdFull(id);
         const newCourse = req.body;
-        
         Object.assign(course, newCourse);
 
         await Repository.update(course);
         res.status(200).json(course);
-    } catch (error) {
+    } catch (err) {
+        console.log(err)
         res.status(400).json({ message: 'error' })
     }
 }

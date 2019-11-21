@@ -20,24 +20,6 @@ exports.create = async (req, res) => {
     }
 }
 
-// exports.update = async (req, res) => {
-//     try{
-//         const newGrade = req.body;
-//         const grade = await Repository.getByCourseUserUnit(newGrade.course, newGrade.user, newGrade.unit);
-
-//         if(grade){
-//             await Repository.update(grade);
-//         } else {
-//             await Repository
-//         }
-//         Object.assign(grade, newGrade);
-
-//         res.status(200).json(grade);
-//     } catch (error) {
-//         res.status(400).json({ message: 'error' })
-//     }
-// }
-
 exports.getGradeByUser = async (req, res) => {
     try{
         const grades = await Repository.getByUser(req.params.id);

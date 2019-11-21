@@ -99,12 +99,15 @@ exports.verifyConclusion = async (req, res) => {
             return res.status(204)
         
         const course = await Repository.getByIdFull(courseId);
-        let qtdVideos = 0;
+        let qtdVideos = 0, qtdActivities = 0;
         for(let unit of course.units){
             if(unit.videos && unit.videos.length > 0){
                 qtdVideos += unit.videos.length;
             }
-        }        
+            if(unit.activity && unit.activity != undefined){
+                qtdActivities += 1;
+            }
+        }
         
         const watchedCourseUser = await wachedRepository.getByCourseAndUser(courseId, userId);
         let qtdVideoUser = 0;
@@ -112,14 +115,7 @@ exports.verifyConclusion = async (req, res) => {
             if(watchUser.watchedVideos && watchUser.watchedVideos.length > 0){
                 qtdVideoUser += watchUser.watchedVideos.length;
             }
-        }
-        
-        let qtdActivities = 0;
-        for(let unit of course.units){
-            if(unit.activity && unit.activity != undefined){
-                qtdActivities += 1;
-            }
-        }        
+        }    
         
         const gradeCourseUser = await gradeRepository.getByCourseAndUser(courseId, userId);
         let qtdGradeUser = 0, sumGrade = 0, finalGrade = 0;
@@ -131,7 +127,8 @@ exports.verifyConclusion = async (req, res) => {
             finalGrade = sumGrade / qtdGradeUser;
         }
 
-        if(qtdVideos == qtdVideoUser && qtdActivities == qtdGradeUser && finalGrade > 70){
+        if((qtdVideos == qtdVideoUser && qtdActivities == qtdGradeUser) && 
+            (qtdActivities > 1 && finalGrade > 70 || qtdActivities == 0)){
             
             if(!courseComplete)
                 return res.status(400).json({ message: 'Falha ao concluir o curso' })
@@ -187,6 +184,17 @@ exports.getFile = async (req, res) => {
     });
 }
 
+exports.removeFile = async (req, res) => {
+    const { filename } = req.body;
+    console.log('deletar arquivo', filename)
+    gfs.remove({ filename: filename, root: 'uploads' }, (err, gridStore) => {
+        if(err)
+            return res.status(404).json({ err: err })
+        res.status(200).json({ message: 'Arquivo removido com sucesso' })
+    });
+
+}
+
 // exports.getCapa = async (req, res) => {
 //     const id = req.parmas.id;
 //     const filename = id + '_capa';
@@ -212,24 +220,23 @@ exports.createEvaluate = async (req, res) => {
         const { evaluate } = req.body;
         const { id } = req.params;
 
-        const courseExist = await Repository.getById(id);
-
-        if( !courseExist ) {
+        let courseExist = await Repository.getByIdFull(id);
+        if(!courseExist)
            return res.status(400).json({ message: 'Este curso não existe'});
-        }
 
         if (courseExist.evaluates && courseExist.evaluates.length > 0) {
             let userEvaluated = courseExist.evaluates.find(e => e.userId === evaluate.userId);
             
-            if ( userEvaluated ) {
+            if ( userEvaluated ) 
                 return res.status(204).json({ });
-            }   
         }
+        
+        if(!courseExist.evaluates)
+            courseExist.evaluates = [];
 
         courseExist.evaluates.push(evaluate);
-        await Repository.update(courseExist)
-        
-        return res.status(200).json({ message: 'Avaliação cadastrada!'});
+        await Repository.update(courseExist);
+        return res.status(200).json({ message: 'Avaliação realizada com sucesso!'});
 
     } catch(error) {
 

@@ -18,10 +18,9 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
     try{
         const id = req.params.id;
-        const user = await Repository.getById(id);
-        delete user.password;
+        let user = await Repository.getById(id);
+        user.password = '';
 
-        console.log('lalal', user);
         res.status(200).json( user )
     } catch (err) {
         console.log( err )
@@ -34,7 +33,16 @@ exports.create = async (req, res) => {
         let user = req.body;
         user.password = md5(user.password + config.tokenJWT);
 
-        const newUser = await Repository.create(user);
+        const existCPF = await Repository.getUserByCPF(user.cpf);
+        if(existCPF)
+            return res.status(400).json({ message: 'CPF já está em uso' })
+        
+        const existUsername = await Repository.getUserByUsename(user.username);
+        if(existUsername)
+            return res.status(400).json({ message: 'O e-mail já está em uso' })
+
+        let newUser = await Repository.create(user);
+        newUser.password = '';
         res.status(200).json( newUser )
     } catch (err) {
         res.status(400).json({ message: 'error', err })
@@ -45,18 +53,26 @@ exports.update = async (req, res) => {
     try{
         const id = req.params.id;
         let user = await Repository.getById(id);
-        const newUser = req.body;
+        let newUser = req.body;
 
+        const existCPF = await Repository.getUserByCPF(newUser.cpf);
+        if(existCPF && existCPF._id != newUser._id)
+            return res.status(400).json({ message: 'CPF já está em uso' });
+        
+        const existUsername = await Repository.getUserByUsename(newUser.username);
+        if(existUsername && existUsername._id != newUser._id)
+            return res.status(400).json({ message: 'O e-mail já está em uso' });
+        
         if(newUser.password && newUser.password !== '') {
             newUser.password = md5(newUser.password + config.tokenJWT);
         } else {
-            delete user.password;
             delete newUser.password;
         }
-
+        
         Object.assign(user, newUser);
         
         await Repository.update(user);
+        user.password = '';
         res.status(200).json( user )
     } catch (err) {
         console.log(err)

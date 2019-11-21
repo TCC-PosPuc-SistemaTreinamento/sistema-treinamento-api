@@ -1,7 +1,7 @@
 const User = require('../models/user').User;
 
 exports.getById = async (id) => {
-    return await User.findById(id, { password: 0 } )
+    return await User.findById(id)
         .populate('role')
         .populate('department');
 }
@@ -19,6 +19,14 @@ exports.create = async (user) => {
 
 exports.getQtd = async() => {
     return await User.count({});
+}
+
+exports.getUserByCPF = async(cpf) => {
+    return await User.findOne({ 'cpf': cpf });
+}
+
+exports.getUserByUsename = async(username) => {
+    return await User.findOne({ 'username': username });
 }
 
 exports.update = async (user) => {

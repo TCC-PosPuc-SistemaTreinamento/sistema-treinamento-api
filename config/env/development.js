@@ -6,10 +6,11 @@ module.exports = {
     tokenJWT: 'secret-jwt-token-auth',
 
     mongodb: {
-        url: 'mongodb://admin:admin@localhost:2017/sistema-treinamento',
+        url: 'mongodb://admin:admin123@ds129098.mlab.com:29098/sistema-treinamento',
+        //url: 'mongodb://localhost:2017/sistema-treinamento',
         option: {
-            user: 'xxx',
-            pass: 'xxx',
+            // user: 'xxx',
+            // pass: 'xxx',
             useMongoClient: true
         }
     }

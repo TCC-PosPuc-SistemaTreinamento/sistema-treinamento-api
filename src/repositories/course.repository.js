@@ -16,6 +16,12 @@ exports.getByIdFull = async (id) => {
     return await Course.findById(id)
 }
 
+exports.getByDashboard = async () => {
+    return await Course.find({})
+        .populate('category')
+        .sort({ name: 1 });
+}
+
 exports.getQtd = async() => {
     return await Course.count({});
 }
